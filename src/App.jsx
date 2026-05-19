@@ -1,4 +1,6 @@
 import Hand from "./components/Hand"
+import ResultBanner from "./components/ResultBanner"
+import GameControls from "./components/GameControls"
 import { useState } from "react"
 import { drawCard, calculateHandValue } from "./utils/deck"
 import "./App.css"
@@ -86,24 +88,18 @@ function App() {
     <div>
       <h1>Blackjack</h1>
 
-      <button onClick={startGame}>
-        Nouvelle partie
-      </button>
-
-      <button
-        onClick={hit}
-        disabled={gamePhase === "ended"}
-      >
-        Hit
-      </button>  
-        
      
-      <button
-        onClick={stand}
-        disabled={gamePhase === "ended"}
-      >
-        Stand
-      </button>
+     
+     <GameControls // Affiche les contrôles du jeu
+        startGame={startGame}
+        hit={hit}
+        stand={stand}
+        gamePhase={gamePhase}
+      />
+     
+     
+     
+     
       // Affiche la main du joueur
       <Hand
         title="Joueur"
@@ -117,13 +113,7 @@ function App() {
         hideFirstCard={gamePhase === "playing"}
       />
 
-
-      // Affiche le résultat de la partie
-      {result === "win" && <p> Victoire</p>}
-      {result === "lose" && <p> Défaite</p>}
-      {result === "push" && <p>Egalité</p>}
-      {result === "blackjack" && <p> Blackjack !</p>}
-    
+      <ResultBanner result={result} />
     </div>
   )
 }
