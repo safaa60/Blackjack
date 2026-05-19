@@ -1,4 +1,4 @@
-function GameControls({ // Composant pour les contrôles du jeu
+function GameControls({ 
   startGame,
   hit,
   stand,

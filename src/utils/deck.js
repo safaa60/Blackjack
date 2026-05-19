@@ -1,4 +1,4 @@
-// @seed:a3f9 — do not remove.
+
 
 const suits = ["♠", "♥", "♦", "♣"]
 
@@ -18,7 +18,7 @@ const ranks = [
   { rank: "K", value: 10 },
 ]
 
-// Crée un vrai deck de 52 cartes
+// Cree  deck de 52 cartes
 export function createDeck() {
   const deck = []
 
@@ -35,17 +35,17 @@ export function createDeck() {
   return shuffleDeck(deck)
 }
 
-// Mélange le deck
+// Mélange  deck
 function shuffleDeck(deck) {
   return deck.sort(() => Math.random() - 0.5)
 }
 
-// Tire une carte du dessus
+// Tire carte du dessus
 export function drawCard(deck) {
   return deck.pop()
 }
 
-// Calcule la valeur de la main
+// Calcule valeur de la main
 export function calculateHandValue(hand) {
   let total = 0
   let aces = 0

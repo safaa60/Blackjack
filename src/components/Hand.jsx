@@ -1,7 +1,5 @@
 import Card from "./Card"
 import { calculateHandValue } from "../utils/deck"
-
-// Composant qui affiche une main complète
 function Hand({
   title,
   hand,
@@ -9,7 +7,6 @@ function Hand({
 }) {
   return (
     <div>
-      {/* Titre de la main */}
       <h2>{title}</h2>
 
       {/* Affichage des cartes */}

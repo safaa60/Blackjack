@@ -16,10 +16,9 @@ function App() {
   // Main du croupier
   const [dealerHand, setDealerHand] = useState([])
 
-  // État de la partie : idle | playing | ended
+
   const [gamePhase, setGamePhase] = useState("idle")
 
-  // Résultat final : win | lose | push | blackjack
   const [result, setResult] = useState(null)
   const [deck, setDeck] = useState([])
 
@@ -41,22 +40,22 @@ function App() {
     setDeck(newDeck)
 
 
-    // Mise à jour des mains
+    
     setPlayerHand(newPlayerHand)
     setDealerHand(newDealerHand)
 
-    // Réinitialise l'état du jeu
+   
     setGamePhase("playing")
     setResult(null)
 
-    // Calcul des scores de départ
+    
     const playerValue =
       calculateHandValue(newPlayerHand)
 
     const dealerValue =
       calculateHandValue(newDealerHand)
 
-    // Vérifie les cas de Blackjack naturel
+    
     if (playerValue === 21 && dealerValue === 21) {
       setResult("push")
       setGamePhase("ended")
@@ -71,7 +70,7 @@ function App() {
     }
   }
 
-  // Action du bouton Hit
+  
   function hit() {
     const newDeck = [...deck]
 
@@ -83,37 +82,36 @@ function App() {
   setDeck(newDeck)
 
 
-    // Met à jour la main du joueur
     setPlayerHand(newHand)
 
-    // Calcule le nouveau total
+  
     const total = calculateHandValue(newHand)
 
-    // Si le joueur dépasse 21 → défaite
+    
     if (total > 21) {
       setResult("lose")
       setGamePhase("ended")
     }
   }
 
-  // Action du bouton Stand
+  
   function stand() {
-    // Copie de la main du croupier
+  
     let newDealerHand = [...dealerHand]
 
-    // Le croupier tire jusqu'à atteindre au moins 17
+    // Le croupier tire jusqu au moins 17
     while (calculateHandValue(newDealerHand) < 17) {
       newDealerHand.push(drawCard(deck))
     }
 
-    // Mise à jour de la main du croupier
+    
     setDealerHand(newDealerHand)
 
-    // Calcul des scores finaux
+    // scores 
     const playerTotal = calculateHandValue(playerHand)
     const dealerTotal = calculateHandValue(newDealerHand)
 
-    // Détermine le résultat de la partie
+    //  résultat de la partie
     if (dealerTotal > 21) {
       setResult("win")
     } else if (playerTotal > dealerTotal) {
@@ -124,7 +122,7 @@ function App() {
       setResult("push")
     }
 
-    // Fin de la partie
+    
     setGamePhase("ended")
   }
 
@@ -132,7 +130,7 @@ function App() {
     <div className="main-container">
       <h1>Blackjack</h1>
 
-      {/* Boutons de contrôle du jeu */}
+      
       <GameControls
         startGame={startGame}
         hit={hit}
@@ -154,7 +152,7 @@ function App() {
         hideFirstCard={gamePhase === "playing"}
       />
 
-      {/* Affiche le résultat final */}
+      {/* Affiche  résultat final */}
       <ResultBanner result={result} />
     </div>
   )
