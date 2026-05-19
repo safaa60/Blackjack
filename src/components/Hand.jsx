@@ -32,5 +32,4 @@ function Hand({
     </div>
   )
 }
-
 export default Hand
