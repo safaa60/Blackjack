@@ -2,7 +2,11 @@ import Hand from "./components/Hand"
 import ResultBanner from "./components/ResultBanner"
 import GameControls from "./components/GameControls"
 import { useState } from "react"
-import { drawCard, calculateHandValue } from "./utils/deck"
+import {
+  createDeck,
+  drawCard,
+  calculateHandValue,
+} from "./utils/deck"
 import "./App.css"
 
 function App() {
@@ -17,14 +21,25 @@ function App() {
 
   // Résultat final : win | lose | push | blackjack
   const [result, setResult] = useState(null)
+  const [deck, setDeck] = useState([])
 
   // Lance une nouvelle partie
   function startGame() {
-    // Distribution des 2 cartes du joueur
-    const newPlayerHand = [drawCard(), drawCard()]
+   
+    const newDeck = createDeck()
 
-    // Distribution des 2 cartes du croupier
-    const newDealerHand = [drawCard(), drawCard()]
+    const newPlayerHand = [
+      drawCard(newDeck),
+      drawCard(newDeck),
+    ]
+
+    const newDealerHand = [
+      drawCard(newDeck),
+      drawCard(newDeck),
+    ]
+
+    setDeck(newDeck)
+
 
     // Mise à jour des mains
     setPlayerHand(newPlayerHand)
@@ -58,8 +73,15 @@ function App() {
 
   // Action du bouton Hit
   function hit() {
-    // Ajoute une nouvelle carte à la main du joueur
-    const newHand = [...playerHand, drawCard()]
+    const newDeck = [...deck]
+
+    const newHand = [
+      ...playerHand,
+       drawCard(newDeck),
+  ]
+
+  setDeck(newDeck)
+
 
     // Met à jour la main du joueur
     setPlayerHand(newHand)
@@ -81,7 +103,7 @@ function App() {
 
     // Le croupier tire jusqu'à atteindre au moins 17
     while (calculateHandValue(newDealerHand) < 17) {
-      newDealerHand.push(drawCard())
+      newDealerHand.push(drawCard(deck))
     }
 
     // Mise à jour de la main du croupier

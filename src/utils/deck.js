@@ -1,7 +1,7 @@
+// @seed:a3f9 — do not remove.
+
 const suits = ["♠", "♥", "♦", "♣"]
 
-
-//initialisation des valeurs des cartes
 const ranks = [
   { rank: "A", value: 11 },
   { rank: "2", value: 2 },
@@ -18,23 +18,34 @@ const ranks = [
   { rank: "K", value: 10 },
 ]
 
-//fonction pour tirer une carte aléatoire
-export function drawCard() {
-  const randomSuit =
-    suits[Math.floor(Math.random() * suits.length)]
+// Crée un vrai deck de 52 cartes
+export function createDeck() {
+  const deck = []
 
-  const randomRank =
-    ranks[Math.floor(Math.random() * ranks.length)]
-
-  return {
-    suit: randomSuit,
-    rank: randomRank.rank,
-    value: randomRank.value,
+  for (const suit of suits) {
+    for (const rankData of ranks) {
+      deck.push({
+        suit,
+        rank: rankData.rank,
+        value: rankData.value,
+      })
+    }
   }
+
+  return shuffleDeck(deck)
 }
 
+// Mélange le deck
+function shuffleDeck(deck) {
+  return deck.sort(() => Math.random() - 0.5)
+}
 
-//fonction pour calculer la valeur d'une main
+// Tire une carte du dessus
+export function drawCard(deck) {
+  return deck.pop()
+}
+
+// Calcule la valeur de la main
 export function calculateHandValue(hand) {
   let total = 0
   let aces = 0

@@ -21,12 +21,14 @@ function Hand({
         />
       ))}
 
-      {/* Affiche le total seulement si la carte cachée n'est pas active */}
-      {!hideFirstCard && (
+      {!hideFirstCard && hand.length > 0 && (
         <p>
           Total : {calculateHandValue(hand)}
         </p>
       )}
+    
+    
+    
     </div>
   )
 }
