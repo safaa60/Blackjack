@@ -1,6 +1,6 @@
 function ResultBanner({ result }) {
   return (
-    <div>
+    <div  className="result">
       {result === "win" && <p>Victoire</p>}
 
       {result === "lose" && <p>Défaite</p>}

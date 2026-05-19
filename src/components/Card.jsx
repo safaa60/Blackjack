@@ -1,11 +1,14 @@
+// Composant qui affiche une carte
+function Card({ card, hidden }) {
 
-function Card({ card, hidden }) {// Composant pour afficher une carte
-  if (hidden) { // Si la carte est cachée, on affiche un point d'interrogation
+  // Si la carte doit être cachée
+  if (hidden) {
     return <div>?</div>
   }
 
+  // Affichage normal de la carte
   return (
-    <div>
+    <div className="card">
       {card.rank} {card.suit}
     </div>
   )

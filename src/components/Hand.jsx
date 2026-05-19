@@ -1,16 +1,19 @@
 import Card from "./Card"
 import { calculateHandValue } from "../utils/deck"
 
-function Hand({// Composant pour afficher une main de cartes
+// Composant qui affiche une main complète
+function Hand({
   title,
   hand,
   hideFirstCard,
 }) {
   return (
     <div>
+      {/* Titre de la main */}
       <h2>{title}</h2>
 
-      {hand.map((card, index) => ( // On affiche chaque carte de la main
+      {/* Affichage des cartes */}
+      {hand.map((card, index) => (
         <Card
           key={index}
           card={card}
@@ -18,9 +21,10 @@ function Hand({// Composant pour afficher une main de cartes
         />
       ))}
 
+      {/* Affiche le total seulement si la carte cachée n'est pas active */}
       {!hideFirstCard && (
         <p>
-          Total : {calculateHandValue(hand)} // Affiche la valeur totale de la main
+          Total : {calculateHandValue(hand)}
         </p>
       )}
     </div>
